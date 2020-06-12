@@ -12,9 +12,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import static frc.robot.Constants.Turret.*;
 
-/**
- * An example command that uses an example subsystem.
- */
 public class TurnTurretToDegrees extends CommandBase {
 
   private Turret turret;
@@ -26,7 +23,6 @@ public class TurnTurretToDegrees extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public TurnTurretToDegrees(Turret subsystem, int targetDegrees) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
     turret = subsystem;
     targetPosition = turret.degreesToPosition(targetDegrees);

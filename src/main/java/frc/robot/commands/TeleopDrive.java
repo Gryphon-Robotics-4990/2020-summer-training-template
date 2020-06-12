@@ -12,21 +12,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import java.util.function.DoubleSupplier;
 
-/**
- * An example command that uses an example subsystem.
- */
 public class TeleopDrive extends CommandBase {
 
   private DriveTrain driveTrain;
   private DoubleSupplier xSpeed, zRotation;
 
   /**
-   * Creates a new TurnTurretToDegrees command.
+   * Creates a new TeleopDrive command.
    *
    * @param subsystem The subsystem used by this command.
    */
   public TeleopDrive(DriveTrain subsystem, DoubleSupplier xSpeed, DoubleSupplier zRotation) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
     driveTrain = subsystem;
   }

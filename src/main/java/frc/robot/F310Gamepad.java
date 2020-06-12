@@ -68,10 +68,6 @@ public class F310Gamepad extends Joystick {
 		super(joystickNumber);
 	}
 
-	public Boolean isButtonPressed(int button) {
-		return this.getRawButton(button);
-	}
-
 	public Boolean isButtonPressed(Buttons button) {
 		return this.getRawButton(button.get());
 	}
@@ -92,22 +88,6 @@ public class F310Gamepad extends Joystick {
 
 	public DoubleSupplier getRawAxis(Axis axis) {
 		return getAxis(axis).getRawAxis();
-	}
-
-	public BooleanSupplier getBooleanAxis(Axis axis) {
-		return () -> getAxis(axis).get();
-	}
-
-	public BooleanSupplier isPOVPressed(int pov) {
-		return () -> this.getPOV(pov) == pov;
-	}
-
-	public BooleanSupplier isPOVPressed(POV pov) {
-		return () -> this.getPOV(pov.get()) == pov.get();
-	}
-
-	public POVButton getPOVButton(int pov) {
-		return new POVButton(this, pov);
 	}
 
 	public POVButton getPOVButton(POV pov) {

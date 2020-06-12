@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.*;
 import io.github.oblarg.oblog.Loggable;
 
@@ -32,7 +33,7 @@ public class Turret extends SubsystemBase implements Loggable {
   private BooleanSupplier inResetZone = () -> !hallEffectA.get() && !hallEffectB.get();
   
   /**
-   * Creates a new ExampleSubsystem.
+   * Creates a new Turret subsytem.
    */
   public Turret() {
     initalizeTalonSRX();
@@ -94,12 +95,18 @@ public class Turret extends SubsystemBase implements Loggable {
     // This method will be called once per scheduler run (20ms)
 
     double currentPosition = talonSRX.getSelectedSensorPosition();
-		if (currentPosition > 22500 && setSpeed != 0) {
+    
+    if (RobotContainer.turretContinuousRotation() && setSpeed != 0 && talonSRX.getControlMode() != ControlMode.MotionMagic) {
+      talonSRX.set(ControlMode.PercentOutput, setSpeed);
+
+    } else if (currentPosition > 22500) {
 			talonSRX.set(ControlMode.PercentOutput, -Math.abs(setSpeed)); //all motion should go counter-clockwise
-			System.out.println("[Turret] motion in danger zone, past BACK point, at " + currentPosition);
+      System.out.println("[Turret] motion in danger zone, past BACK point, at " + currentPosition);
+      
 		} else if (currentPosition < -6700 && setSpeed != 0) {
 			talonSRX.set(ControlMode.PercentOutput, Math.abs(setSpeed)); //all motion should go clockwise
-			System.out.println("[Turret] motion in danger zone, past LEFT point, at " + currentPosition);
+      System.out.println("[Turret] motion in danger zone, past LEFT point, at " + currentPosition);
+      
 		} else if (talonSRX.getControlMode() != ControlMode.MotionMagic) {
 			talonSRX.set(ControlMode.PercentOutput, setSpeed);
 		}

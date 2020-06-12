@@ -28,12 +28,11 @@ public class DriveTrain extends SubsystemBase implements Loggable {
     new SpeedControllerGroup(leftFront, leftRear), new SpeedControllerGroup(rightFront, rightRear));
   
   /**
-   * Creates a new ExampleSubsystem.
+   * Creates a new DriveTrain.
    */
   public DriveTrain() {
     configureTalonSRX();
     configurePID();
-    
     differentialDrive.setExpiration(kDifferentialDriveExpiration);
   }
 
@@ -115,8 +114,9 @@ public class DriveTrain extends SubsystemBase implements Loggable {
     differentialDrive.stopMotor();
   }
 
+  // This method will be called once per scheduler run (20ms)
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run (20ms)
+    
   }
 }

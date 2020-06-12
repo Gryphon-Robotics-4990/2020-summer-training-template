@@ -20,7 +20,7 @@ public class Cargo extends SubsystemBase implements Loggable{
   private WPI_TalonSRX talonSRX = new WPI_TalonSRX(kCANID);
   
   /**
-   * Creates a new ExampleSubsystem.
+   * Creates a new Cargo subsystem.
    */
   public Cargo() {
   }
@@ -41,8 +41,9 @@ public class Cargo extends SubsystemBase implements Loggable{
     talonSRX.set(ControlMode.Disabled, 0);
   }
 
+  // This method will be called once per scheduler run (20ms)
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run (20ms)
+    
   }
 }
